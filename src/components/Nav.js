@@ -3,6 +3,8 @@ import { Location } from '@reach/router'
 import { Link } from 'gatsby'
 import { Menu, X } from 'react-feather'
 import Logo from './Logo'
+import { SocialIcon } from 'react-social-icons';
+
 
 import './Nav.css'
 
@@ -28,7 +30,6 @@ export class Navigation extends Component {
 
   render() {
     const { active } = this.state,
-      { subNav } = this.props,
       NavLink = ({ to, className, children, ...props }) => (
         <Link
           to={to}
@@ -45,49 +46,31 @@ export class Navigation extends Component {
     return (
       <nav className={`Nav ${active ? 'Nav-active' : ''}`}>
         <div className="Nav--Container container">
-          <Link to="/" onClick={this.handleLinkClick}>
+          <Link to="/home/" onClick={this.handleLinkClick}>
             <Logo />
           </Link>
+          <div className="smedialinks">
+          <span style={{margin:'5px'}}>
+          <SocialIcon url="https://www.facebook.com/listedbookings"  style={{ height: 25, width: 25 }} />
+          </span>
+          <span style={{margin:'5px'}}>
+          <SocialIcon url="https://www.instagram.com/areulisted"  style={{ height: 25, width: 25 }} />
+          </span>
+          <span style={{margin:'5px'}}>
+          <SocialIcon  url="https://twitter.com/areulisted"  style={{ height: 25, width: 25, }} />
+          </span>
+          </div>
           <div className="Nav--Links">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/components/">Components</NavLink>
-            <div
-              className={`Nav--Group ${
-                this.state.activeSubNav === 'posts' ? 'active' : ''
-              }`}
-            >
-              <span
-                className={`NavLink Nav--GroupParent ${
-                  this.props.location.pathname.includes('posts') ||
-                  this.props.location.pathname.includes('blog') ||
-                  this.props.location.pathname.includes('post-categories')
-                    ? 'active'
-                    : ''
-                }`}
-                onClick={() => this.toggleSubNav('posts')}
-              >
-                Blog
-              </span>
-              <div className="Nav--GroupLinks">
-                <NavLink to="/blog/" className="Nav--GroupLink">
-                  All Posts
-                </NavLink>
-                {subNav.posts.map((link, index) => (
-                  <NavLink
-                    to={link.slug}
-                    key={'posts-subnav-link-' + index}
-                    className="Nav--GroupLink"
-                  >
-                    {link.title}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-            <NavLink to="/default/">Default</NavLink>
-            <NavLink to="/contact/">Contact</NavLink>
+            <NavLink id="navc1" to="/home/">Home</NavLink>
+            <NavLink id="navc2" to="/artists/">Artists</NavLink>
+            <NavLink id="navc3" to="/productions/">Productions</NavLink>
+            <NavLink id="navc4" to="/news/">Buzz</NavLink>
+            <NavLink id="navc5" to="/contact/">Contact</NavLink>
+         
           </div>
           <button
             className="Button-blank Nav--MenuButton"
+            style={{color:'white'}}
             onClick={this.handleMenuToggle}
           >
             {active ? <X /> : <Menu />}
@@ -101,3 +84,5 @@ export class Navigation extends Component {
 export default ({ subNav }) => (
   <Location>{route => <Navigation subNav={subNav} {...route} />}</Location>
 )
+
+

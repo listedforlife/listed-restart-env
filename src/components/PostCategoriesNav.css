@@ -1,9 +1,8 @@
 .PostCategoriesNav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  position: relative;
+  margin-top: -1rem;
+  text-align:right;
+  margin-right: 69px;
+
 }
 
 .PostCategoriesNav > * + * {
@@ -11,12 +10,11 @@
 }
 
 .PostCategoriesNav input[type='text'] {
-  right: 0;
-  position: absolute;
+
   border: 0;
   padding: 1rem 2rem;
-  border-radius: 2rem;
-  font-size: 1.4rem;
+  border-radius: 1rem;
+  font-size: 1.6rem;
   color: black;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
@@ -32,6 +30,10 @@
 @media (max-width: 600px) {
   .PostCategoriesNav input[type='text'] {
     position: relative;
-    width: 100%;
+    width: 50%;
   }
+  .PostCategoriesNav {
+  margin-right: 20px;
+
+}
 }

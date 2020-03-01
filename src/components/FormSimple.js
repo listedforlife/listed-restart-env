@@ -5,23 +5,25 @@ import './Form.css'
 export default ({
   name = 'Simple Form',
   subject = '', // optional subject of the notification email
-  action = ''
+  method = 'pst'
 }) => (
   <form
+    name = "contact"
     className='Form'
-    name={name}
-    action={action}
-    data-netlify=''
-    data-netlify-honeypot='_gotcha'
+    method="post"
+    data-netlify='true'
+    data-netlify-honeypot='bot-field'
   >
-    <label className='Form--Label'>
-      <input
+    <label className='Form--Label' >
+      <input style={{color:'white'}}
         className='Form--Input'
         type='text'
         placeholder='Name'
         name='name'
         required
       />
+      <input type="hidden" name="bot-field" />
+<input type="hidden" name="form-name" value="contact" />
     </label>
     <label className='Form--Label'>
       <input
@@ -33,7 +35,7 @@ export default ({
       />
     </label>
     <label className='Form--Label has-arrow'>
-      <select
+      <select style={{borderColor:'white'}}
         className='Form--Input Form--Select'
         name='type'
         defaultValue='Type of Enquiry'
@@ -42,9 +44,9 @@ export default ({
         <option disabled hidden>
           Type of Enquiry
         </option>
-        <option>Need to know more</option>
-        <option>Found a bug</option>
-        <option>Want to say hello</option>
+        <option>Bookings Inquiry</option>
+        <option>Productions And Events</option>
+        <option>General Inquiry</option>
       </select>
     </label>
     <label className='Form--Label'>

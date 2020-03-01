@@ -1,7 +1,6 @@
 .InstagramFeed {
   display: flex;
   flex-wrap: wrap;
-  background: white;
 }
 
 .InstagramFeed--EmptyPost {

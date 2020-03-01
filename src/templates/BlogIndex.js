@@ -2,11 +2,13 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import qs from 'qs'
+import Content from '../components/Content'
 
 import PageHeader from '../components/PageHeader'
 import PostSection from '../components/PostSection'
 import PostCategoriesNav from '../components/PostCategoriesNav'
 import Layout from '../components/Layout'
+import './BlogIndex.css'
 
 /**
  * Filter posts by date. Feature dates will be fitered
@@ -19,37 +21,20 @@ export const byDate = posts => {
   return posts.filter(post => Date.parse(post.date) <= now)
 }
 
-/**
- * filter posts by category.
- *
- * @param {posts} object
- * @param {title} string
- * @param {contentType} string
- */
-export const byCategory = (posts, title, contentType) => {
-  const isCategory = contentType === 'postCategories'
-  const byCategory = post =>
-    post.categories &&
-    post.categories.filter(cat => cat.category === title).length
-  return isCategory ? posts.filter(byCategory) : posts
-}
 
 // Export Template for use in CMS preview
 export const BlogIndexTemplate = ({
   title,
-  subtitle,
   featuredImage,
+  body,
   posts = [],
   postCategories = [],
   enableSearch = true,
-  contentType
 }) => (
   <Location>
     {({ location }) => {
       let filteredPosts =
-        posts && !!posts.length
-          ? byCategory(byDate(posts), title, contentType)
-          : []
+        posts
 
       let queryObj = location.search.replace('?', '')
       queryObj = qs.parse(queryObj)
@@ -62,21 +47,15 @@ export const BlogIndexTemplate = ({
       }
 
       return (
-        <main className="Blog">
-          <PageHeader
-            title={title}
-            subtitle={subtitle}
-            backgroundImage={featuredImage}
-          />
-
-          {!!postCategories.length && (
-            <section className="section thin">
-              <div className="container">
-                <PostCategoriesNav enableSearch categories={postCategories} />
-              </div>
-            </section>
-          )}
-
+        <main className="Buzz">
+<h1>Buzz</h1>
+{!!postCategories.length && (
+  <section className="section search">
+    <div style={{textAlign:'center'}}>
+      <PostCategoriesNav enableSearch categories={postCategories} />
+    </div>
+  </section>
+)}
           {!!posts.length && (
             <section className="section">
               <div className="container">
@@ -84,6 +63,7 @@ export const BlogIndexTemplate = ({
               </div>
             </section>
           )}
+
         </main>
       )
     }}
@@ -128,10 +108,9 @@ export const pageQuery = graphql`
         contentType
       }
       frontmatter {
+        url
         title
-        excerpt
         template
-        subtitle
         featuredImage
       }
     }
@@ -148,10 +127,8 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            url
             date
-            categories {
-              category
-            }
             featuredImage
           }
         }

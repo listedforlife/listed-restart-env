@@ -30,7 +30,6 @@
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
-  background: var(--white);
 }
 
 .Form--Label > span {
@@ -57,6 +56,7 @@
   width: 100%;
   transition: 0.3s ease all;
   background: transparent;
+  color:white;
 }
 
 .Form--InputText:valid,
@@ -82,8 +82,9 @@
 }
 
 .Form--Select {
-  background: none;
+  color:white;
   appearance: none;
+  border-color: white;
 }
 
 .Form--Label.has-arrow:after {
@@ -120,8 +121,12 @@
   cursor: progress;
 }
 
+::placeholder {
+  color: rgb(255, 255, 255);
+}
+
 .Form--Input::placeholder {
-  color: transparent;
+  color: white;
 }
 
 .Form--Alert {
